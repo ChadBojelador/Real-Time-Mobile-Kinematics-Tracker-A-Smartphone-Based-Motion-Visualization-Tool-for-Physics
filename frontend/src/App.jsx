@@ -1,40 +1,45 @@
-import { Routes, Route, NavLink } from 'react-router-dom';
-import './styles/App.css'; // Ensure you import the CSS file
+import { useState } from 'react'
+import Sender from './components/Sender.jsx';
+import Receiver from './components/Receiver.jsx';
 
-// Import your pages
-import Home from './Home.jsx';
-import Dashboard from './Dashboard.jsx';
 
-function App() {
+export default function App() {
+  const [view, setView] = useState('sender');
+
   return (
     <div>
-      {/* --- Modern Navigation Bar --- */}
-      <nav className="navbar">
-        {/* 1. Logo / Brand Name */}
-        <div className="logo"></div>
-
-        {/* 2. Navigation Links */}
-        <div className="nav-links">
-          <NavLink to="/" className="nav-item">
-            Home
-          </NavLink>
-          
-          <NavLink to="/dashboard" className="nav-item">
-            Dashboard
-          </NavLink>
+      <div style={{ backgroundColor: '#333', color: 'white', padding: '15px' }}>
+        <h1 style={{ margin: 0 }}>GPS Tracker Demo</h1>
+        <div style={{ marginTop: '10px' }}>
+          <button 
+            onClick={() => setView('sender')}
+            style={{ 
+              marginRight: '10px', 
+              padding: '8px 16px',
+              backgroundColor: view === 'sender' ? '#4CAF50' : '#666',
+              color: 'white',
+              border: 'none',
+              cursor: 'pointer'
+            }}
+          >
+            Sender (Phone)
+          </button>
+          <button 
+            onClick={() => setView('receiver')}
+            style={{ 
+              padding: '8px 16px',
+              backgroundColor: view === 'receiver' ? '#4CAF50' : '#666',
+              color: 'white',
+              border: 'none',
+              cursor: 'pointer'
+            }}
+          >
+            Receiver (Laptop)
+          </button>
         </div>
-      </nav>
-
-      {/* --- Page Content --- */}
-      {/* Adding some padding here so content doesn't hide behind sticky nav if used */}
-      <div style={{ padding: '20px' }}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Routes>
       </div>
+
+      {view === 'sender' ? <Sender /> : <Receiver />}
     </div>
   );
 }
-
-export default App;
