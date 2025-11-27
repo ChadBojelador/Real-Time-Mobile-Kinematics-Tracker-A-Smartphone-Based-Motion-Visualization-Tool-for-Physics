@@ -1,45 +1,38 @@
-import { useState } from 'react'
+import { useState } from 'react';
 import Sender from './components/Sender.jsx';
 import Receiver from './components/Receiver.jsx';
-
+import './index.css';
 
 export default function App() {
   const [view, setView] = useState('sender');
 
   return (
-    <div>
-      <div style={{ backgroundColor: '#333', color: 'white', padding: '15px' }}>
-        <h1 style={{ margin: 0 }}>GPS Tracker Demo</h1>
-        <div style={{ marginTop: '10px' }}>
-          <button 
-            onClick={() => setView('sender')}
-            style={{ 
-              marginRight: '10px', 
-              padding: '8px 16px',
-              backgroundColor: view === 'sender' ? '#4CAF50' : '#666',
-              color: 'white',
-              border: 'none',
-              cursor: 'pointer'
-            }}
-          >
-            Sender (Phone)
-          </button>
-          <button 
-            onClick={() => setView('receiver')}
-            style={{ 
-              padding: '8px 16px',
-              backgroundColor: view === 'receiver' ? '#4CAF50' : '#666',
-              color: 'white',
-              border: 'none',
-              cursor: 'pointer'
-            }}
-          >
-            Receiver (Laptop)
-          </button>
+    <div className="app">
+      <div className="panel-left">
+        <div>
+          <h1 className="brand-title">Physics Motion Tracker</h1>
+          <p className="lead">Measure distance, velocity, acceleration, and time through any cell-smart phone.</p>
+
+          <div className="controls">
+            <button
+              onClick={() => setView('sender')}
+              className={"btn " + (view === 'sender' ? 'btn-primary' : 'btn-secondary')}
+            >
+              Sender (Phone)
+            </button>
+            <button
+              onClick={() => setView('receiver')}
+              className={"btn " + (view === 'receiver' ? 'btn-primary' : 'btn-secondary')}
+            >
+              Receiver (Laptop)
+            </button>
+          </div>
         </div>
       </div>
 
-      {view === 'sender' ? <Sender /> : <Receiver />}
+      <div className="panel-right">
+        {view === 'sender' ? <Sender /> : <Receiver />}
+      </div>
     </div>
   );
 }
